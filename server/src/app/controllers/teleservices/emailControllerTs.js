@@ -1,4 +1,4 @@
-const { getAndFlagUnreadMessages, markMessageAsRead } = require("../../services/emailServiceCctv");
+const { getAndFlagUnreadMessages, markMessageAsRead } = require("../../services/emailServiceTs");
 const BcpAlerts = require("../../models/teleservices/BcpAlerts");
 const { simpleParser } = require("mailparser");
 

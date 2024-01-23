@@ -1,9 +1,9 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const sequelize = require("../../../config/database");
 
-class BcpAlert extends Model {}
+class Event extends Model {}
 
-BcpAlert.init(
+Event.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,29 +11,37 @@ BcpAlert.init(
       autoIncrement: true,
       allowNull: false,
     },
-    orderingCompany: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    beneficiary: {
+    eventType: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    account: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    amount: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    message: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    dateTime: {
+    eventTime: {
       type: DataTypes.DATE,
       allowNull: false,
+    },
+    dvrName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    dvrSerialNumber: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    cameraName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.ENUM("new","pending", "completed"),
+      allowNull: true,
+    },
+    observations: {
+      type: DataTypes.TEXT,
+      allowNull: true,
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -48,10 +56,10 @@ BcpAlert.init(
   },
   {
     sequelize,
-    modelName: "BcpAlert",
-    tableName: "BcpAlerts",
+    modelName: "Event",
+    tableName: "Events",
     timestamps: true,
   }
 );
 
-module.exports = BcpAlert;
+module.exports = Event;

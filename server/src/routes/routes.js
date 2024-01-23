@@ -1,16 +1,15 @@
-const { readAndProcessUnreadEmails } = require('../app/controllers/alertsCctv/emailControllerCctv');
+const emailCctv = require('../app/controllers/alertsCctv/emailControllerCctv');
+const emailTs = require('../app/controllers/teleservices/emailControllerTs');
 const eventController = require('../app/controllers/alertsCctv/eventController'); 
 const testController = require('../app/controllers/alertsCctv/testController');
 const sendEmailController = require('../app/controllers/sendEmailController');
 const userController = require('../app/controllers/userController');
 const authController = require('../app/controllers/authController');
-const emailControllerTs = require('../app/controllers/teleservices/emailControllerTs');
-
 const routes = require('express').Router();
 
 // Middlewares
-const { validateSchema } = require('../app/middleware/validateSchema');
 const { createUserSchema, updateUserSchema } = require('../app/validators/userSchema');
+const { validateSchema } = require('../app/middleware/validateSchema');
 const { loginSchema } = require("../app/validators/authSchema");
 const authRequired = require('../app/middleware/validateToken');
 
@@ -30,7 +29,7 @@ routes.get('/api', (req, res) => {
  * description: Email API
  */
 // Email CCTV routes
-routes.get('/process-unread-emails', authRequired, readAndProcessUnreadEmails);
+routes.get('/process-emails-cctv', authRequired, emailCctv.readAndProcessUnreadEmails);
 routes.get('/tests/counts', authRequired, testController.getCountOfTests);
 routes.get('/events', authRequired, eventController.getEvents);
 routes.get('/tests', authRequired, testController.getAllTests);
@@ -53,7 +52,7 @@ routes.post('/send-email', authRequired, async (req, res) => {
  * description: Email API
  */
  // Email Teleservices routes
-routes.get('/bcp', emailControllerTs.readAndProcessUnreadEmails);
+ routes.get('/process-emails-ts', authRequired, emailTs.readAndProcessUnreadEmails);
 
 /**
  * @swagger
