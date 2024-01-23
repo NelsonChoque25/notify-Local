@@ -1,6 +1,6 @@
 const { getAndFlagUnreadMessages, markMessageAsRead } = require("../../services/emailServiceCctv");
-const Event = require("../../models/alertCctv/Event");
-const Test = require("../../models/alertCctv/Test");
+const EventHv = require("../../models/alertCctv/EventHv");
+const Test = require("../../models/alertCctv/TestHv");
 const { simpleParser } = require("mailparser");
 
 const readAndProcessUnreadEmails = async (req, res) => {
@@ -28,7 +28,7 @@ const processAndSaveEmails = async () => {
       if (subject.includes('Embedded Net DVR')) {
         if (subject.includes('TEST MESSAGE FROM:')) {
           // Procesar como prueba (TEST MESSAGE)
-          await Test.create({
+          await TestHv.create({
             name: senderName,
             message: parsedEmail.text,
             date: emailDate,
@@ -41,7 +41,7 @@ const processAndSaveEmails = async () => {
           const dvrSNMatch = body.match(/DVR S\/N:\s*(.*)/);
           const cameraNameMatch = body.match(/CAMERA NAME\(NUM\):\s*(.*)/);
     
-          await Event.create({
+          await EventHv.create({
             name: senderName,
             eventType: eventTypeMatch ? eventTypeMatch[1].trim() : "",
             eventTime: eventTimeMatch

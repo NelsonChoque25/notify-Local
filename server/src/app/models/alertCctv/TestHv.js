@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const sequelize = require("../../../config/database");
 
-class Test extends Model {}
+class TestHv extends Model {}
 
 Test.init(
   {
@@ -26,8 +26,8 @@ Test.init(
   },
   {
     sequelize,
-    modelName: "Test",
-    tableName: "Tests",
+    modelName: "TestHv",
+    tableName: "TestsHv",
     timestamps: false,
   }
 );

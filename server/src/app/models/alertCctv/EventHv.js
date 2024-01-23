@@ -1,9 +1,9 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const sequelize = require("../../../config/database");
 
-class Event extends Model {}
+class EventHv extends Model {}
 
-Event.init(
+EventHv.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -56,10 +56,10 @@ Event.init(
   },
   {
     sequelize,
-    modelName: "Event",
-    tableName: "Events",
+    modelName: "EventHv",
+    tableName: "EventsHv",
     timestamps: true,
   }
 );
 
-module.exports = Event;
+module.exports = EventHv;
