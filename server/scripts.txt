@@ -1,0 +1,19 @@
+Comando migración:
+npx sequelize-cli db:migrate 
+
+<======================================================>
+
+Comando seeders
+npx sequelize-cli db:seed:all 
+
+<======================================================>
+
+
+Crear tablas
+npx sequelize-cli migration:generate --name create-users
+npx sequelize-cli migration:generate --name create-events
+npx sequelize-cli migration:generate --name create-tests
+npx sequelize-cli migration:generate --name create-bcpAlerts
+
+<======================================================>
+

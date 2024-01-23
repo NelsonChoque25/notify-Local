@@ -1,0 +1,33 @@
+
+.sidebar {
+  max-width: 240px !important;
+}
+
+.sidebar-link{
+  padding: 5px 15px;
+  margin: 2px 5px ;
+}
+
+.sidebar-link:hover {
+  background: #1266f10d;
+  border-radius: 5px;
+}
+
+.dropdown-sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.dropdown-sidebar a > span {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.sidebar-link.active {
+  background: #1266f10d;
+  border-radius: 5px;
+  color: blue !important;
+}
+
