@@ -7,7 +7,7 @@ module.exports = {
 
     const statusValues = ['new', 'pending', 'completed'];
 
-    await queryInterface.createTable('EventsHv', {
+    await queryInterface.createTable('EventHv', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -61,7 +61,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('EventsHv');
+    await queryInterface.dropTable('EventHv');
   }
 };
 

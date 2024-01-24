@@ -7,7 +7,7 @@ module.exports = {
 
     const statusValues = ['new', 'pending', 'completed'];
     
-    await queryInterface.createTable('EventsSamsung', {
+    await queryInterface.createTable('EventSamsung', {
       id: {
         allowNull: false,
         autoIncrement: true,

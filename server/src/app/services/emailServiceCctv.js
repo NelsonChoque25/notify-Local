@@ -1,4 +1,6 @@
 // emailService.js
+const { processSamsungEmail, processTestHvEmail, processEventHvEmail } = require('./emailParsingService');
+const { parseEmailSubject, extractSenderName } = require('../utils/emailUtils');
 const { simpleParser } = require("mailparser");
 const Imap = require("imap");
 require("dotenv").config();
@@ -143,4 +145,35 @@ const markMessageAsRead = async (uid) => {
   });
 };
 
-module.exports = { getEmailData, getAndFlagUnreadMessages, markMessageAsRead };
+// Función para procesar y guardar los correos electrónicos
+const processAndSaveEmails = async () => {
+  try {
+    const emails = await getAndFlagUnreadMessages();
+    for (const { uid, message } of emails) {
+      const parsedEmail = await simpleParser(message);
+      const subject = parseEmailSubject(parsedEmail);
+      const senderName = extractSenderName(parsedEmail);
+
+      if (subject.includes("SDR-B73303")) {
+        await processSamsungEmail(parsedEmail);
+      } else if (subject.includes("TEST MESSAGE FROM:")) {
+        await processTestHvEmail(parsedEmail, senderName);
+      } else if (subject.includes("Embedded Net DVR")) {
+        await processEventHvEmail(parsedEmail, senderName);
+      } 
+
+      await markMessageAsRead(uid);
+    }
+    console.log("Correos procesados y guardados correctamente.");
+  } catch (error) {
+    console.error("Error al procesar y guardar correos:", error);
+    throw error;
+  }
+};
+
+module.exports = {
+  getEmailData,
+  getAndFlagUnreadMessages,
+  markMessageAsRead,
+  processAndSaveEmails,
+};

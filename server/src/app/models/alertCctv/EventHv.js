@@ -1,7 +1,11 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const sequelize = require("../../../config/database");
 
-class EventHv extends Model {}
+class EventHv extends Model {
+  /**
+   * Helper method for defining associations.
+   */
+}
 
 EventHv.init(
   {
@@ -57,7 +61,7 @@ EventHv.init(
   {
     sequelize,
     modelName: "EventHv",
-    tableName: "EventsHv",
+    tableName: "EventHv",
     timestamps: true,
   }
 );

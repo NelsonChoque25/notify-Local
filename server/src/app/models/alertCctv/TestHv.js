@@ -1,7 +1,11 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const sequelize = require("../../../config/database");
 
-class TestHv extends Model {}
+class TestHv extends Model {
+  /**
+   * Helper method for defining associations.
+   */
+}
 
 TestHv.init(
   {
@@ -27,7 +31,7 @@ TestHv.init(
   {
     sequelize,
     modelName: "TestHv",
-    tableName: "TestsHv",
+    tableName: "TestHv",
     timestamps: false,
   }
 );

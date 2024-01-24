@@ -1,9 +1,9 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const sequelize = require("../../../config/database");
 
-class TestsSamsung extends Model {}
+class EventSamsung extends Model {}
 
-TestsSamsung.init(
+EventSamsung.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -23,20 +23,35 @@ TestsSamsung.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    message: {
+    dateTime: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    datetime: {
+    status: {
+      type: DataTypes.ENUM("new", "pending", "completed"),
+      allowNull: true,
+    },
+    observations: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
     },
   },
   {
     sequelize,
-    modelName: "TestSamsung",
-    tableName: "TestsSamsung",
+    modelName: "EventSamsung",
+    tableName: "EventSamsung",
+    timestamps: true,
   }
 );
 
-module.exports = TestsSamsung;
+module.exports = EventSamsung;
