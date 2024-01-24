@@ -158,3 +158,8 @@ input {
 }
 
 /* HTML: <div class="loader"></div> */
+
+.avatar {
+  height: 40px;
+  width: 40px;
+}

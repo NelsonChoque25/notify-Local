@@ -1,8 +1,8 @@
-const Event = require("../../models/alertCctv/Event");
+const EventHv = require("../../models/alertCctv/EventHv");
 
 getEvents = async (req, res) => {
   try {
-    const events = await Event.findAll();
+    const events = await EventHv.findAll();
     return res.json(events);
   } catch (error) {
     console.error("Error al obtener los eventos:", error);

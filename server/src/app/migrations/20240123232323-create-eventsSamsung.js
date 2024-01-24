@@ -4,6 +4,9 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
+
+    const statusValues = ['new', 'pending', 'completed'];
+    
     await queryInterface.createTable('EventsSamsung', {
       id: {
         allowNull: false,
@@ -27,6 +30,24 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
+      status: {
+        type: Sequelize.ENUM(...statusValues),
+        allowNull: true
+      },
+      observations: {
+        type: Sequelize.TEXT,
+        allowNull: true
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
+      }
     });
   },
 

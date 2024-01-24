@@ -1,39 +1,30 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const sequelize = require("../../../config/database");
+class EventsSamsung extends Model {}
 
-class EventHv extends Model {}
-
-EventHv.init(
+EventsSamsung.init(
   {
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
       allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    eventType: {
+    macAddress: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    eventTime: {
+    eventName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    dateTime: {
       type: DataTypes.DATE,
       allowNull: false,
-    },
-    dvrName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    dvrSerialNumber: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    cameraName: {
-      type: DataTypes.STRING,
-      allowNull: true,
     },
     status: {
       type: DataTypes.ENUM("new", "pending", "completed"),
@@ -56,10 +47,10 @@ EventHv.init(
   },
   {
     sequelize,
-    modelName: "EventHv",
-    tableName: "EventsHv",
+    modelName: "EventSamsung",
+    tableName: "EventsSamsung",
     timestamps: true,
   }
 );
 
-module.exports = EventHv;
+module.exports = EventsSamsung;

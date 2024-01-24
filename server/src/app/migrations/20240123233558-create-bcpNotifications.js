@@ -5,7 +5,6 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('BcpNotifications', {
-      await queryInterface.createTable('BcpNotifications', {
         id: {
           allowNull: false,
           autoIncrement: true,
@@ -57,7 +56,6 @@ module.exports = {
           type: Sequelize.STRING
         },
       });
-    });
   },
 
   async down (queryInterface, Sequelize) {

@@ -1,4 +1,4 @@
-const Test = require("../../models/alertCctv/Test");
+const Test = require("../../models/alertCctv/TestHv");
 
 const getAllTests = async (req, res) => {
   try {

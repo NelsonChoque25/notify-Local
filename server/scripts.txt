@@ -1,5 +1,7 @@
 Cmd migration:
 npx sequelize-cli db:migrate 
+Revert
+npx sequelize-cli db:migrate:undo
 
 <======================================================>
 

@@ -3,7 +3,7 @@ const sequelize = require("../../../config/database");
 
 class TestHv extends Model {}
 
-Test.init(
+TestHv.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -32,4 +32,4 @@ Test.init(
   }
 );
 
-module.exports = Test;
+module.exports = TestHv;

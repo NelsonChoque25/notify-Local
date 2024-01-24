@@ -4,6 +4,7 @@ import { BsBoxArrowRight } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import Logo from "../../assets/img/logo.png";
+import { FaHome } from "react-icons/fa";
 import "./Sidebar.css";
 
 const Sidebar = ({ show, handleClose }) => {
@@ -48,13 +49,13 @@ const Sidebar = ({ show, handleClose }) => {
               to="/"
               className="sidebar-link d-flex flex-column align-items-center my-2 gap-4 fs-6"
             >
-              <span>Home</span>
+              <FaHome size={30} />
             </NavLink>
             <hr/>
             <Button
               variant="dark"
               onClick={logout}
-              className="d-flex btn-sm align-items-center justify-content-center gap-2 rounded-0 mx-4"
+              className="d-flex btn-sm align-items-center justify-content-center gap-2 mx-4"
             >
               <BsBoxArrowRight /> Log Out
             </Button>

@@ -1,6 +1,6 @@
+const eventControllerHv = require('../app/controllers/alertsCctv/eventHvController'); 
 const emailCctv = require('../app/controllers/alertsCctv/emailControllerCctv');
 const emailTs = require('../app/controllers/teleservices/emailControllerTs');
-const eventController = require('../app/controllers/alertsCctv/eventController'); 
 const testController = require('../app/controllers/alertsCctv/testController');
 const sendEmailController = require('../app/controllers/sendEmailController');
 const userController = require('../app/controllers/userController');
@@ -31,7 +31,7 @@ routes.get('/api', (req, res) => {
 // Email CCTV routes
 routes.get('/process-emails-cctv', authRequired, emailCctv.readAndProcessUnreadEmails);
 routes.get('/tests/counts', authRequired, testController.getCountOfTests);
-routes.get('/events', authRequired, eventController.getEvents);
+routes.get('/events', authRequired, eventControllerHv.getEvents);
 routes.get('/tests', authRequired, testController.getAllTests);
 routes.post('/send-email', authRequired, async (req, res) => {
   const { recipient, subject, message } = req.body;

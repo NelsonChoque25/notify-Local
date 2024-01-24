@@ -18,7 +18,7 @@ const Layout = () => {
 
   return (
     <AuthProvider>
-      {location.pathname !== "/login" && <Header handleShow={handleShow} />}
+      {location.pathname !== "/login" && <Header handleShow={handleShow} handleClose={handleClose} />}
       <Container fluid>
           {location.pathname !== "/login" && <Sidebar show={show} handleClose={handleClose} />}
           <AppRoutes />
