@@ -10,7 +10,7 @@ import "./Home.css";
 const Home = () => {
   return (
     <>
-      <Row>
+      <Row className="my-5 mx-2">
         <Col lg={6}>
           <CardEventHv />
           <TestHv />

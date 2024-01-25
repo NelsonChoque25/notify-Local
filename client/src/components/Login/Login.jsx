@@ -33,17 +33,17 @@ const Login = () => {
       <Row className="justify-content-md-center">
         <Col xs={12} md={8} lg={6} className="w-100">
           <img
-            className="my-5 logo-login"
+            className="logo-login"
             src={Logo}
             alt="Logo"
           />
-          <Card className="login-card rounded-5 shadow">
+          <Card className="login-card rounded-5 shadow p-4">
             <Card.Header className="header-login fs-2 text-center fw-bold">
               Log In
             </Card.Header>
             <Card.Body>
               <Form onSubmit={handleSubmit(onSubmit)}>
-                <Form.Group className="mb-4" controlId="formBasicEmail">
+                <Form.Group className="mb-2">
                   <Form.Label>Email</Form.Label>
                   <Form.Control
                     type="email"

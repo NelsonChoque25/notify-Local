@@ -3,20 +3,20 @@
 }
 
 .login-card {
-  width: 370px;
+  width: 380px;
 }
 
 .logo-login {
   width: 220px !important;
   display: flex;
   justify-content: center;
-  margin: 0 auto;
+  margin: 1rem auto;
 }
 
 .header-login {
   background-color: rgb(255, 255, 255);
   border: none;
-  margin: 25px 0;
+  margin: 2rem 0;
 }
 
 .blue {

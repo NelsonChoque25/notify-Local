@@ -72,7 +72,7 @@ const CardEventSamsung = () => {
                       {Object.entries(JSON.parse(event.eventName)).map(
                         ([key, value]) => (
                           <pre key={key}>
-                            <span>{key}:</span>
+                            <span>{key} </span>
                             {value}
                           </pre>
                         )
