@@ -5,7 +5,8 @@ import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import Logo from "../../assets/img/logo.png";
 import { FaHome } from "react-icons/fa";
-import "./Sidebar.css";
+import TeamCard from "./TeamCard";
+import "./sidebar.css";
 
 const Sidebar = ({ show, handleClose }) => {
   const { logoutUser } = useAuth();
@@ -43,7 +44,8 @@ const Sidebar = ({ show, handleClose }) => {
             />
           </a>
         </Offcanvas.Header>
-        <Offcanvas.Body className="p-1">
+        <hr />
+        <Offcanvas.Body className="p-3">
           <Nav defaultActiveKey="/home" className="flex-column">
             <NavLink
               to="/"
@@ -51,11 +53,12 @@ const Sidebar = ({ show, handleClose }) => {
             >
               <FaHome size={30} />
             </NavLink>
-            <hr/>
+            <hr />
+            <TeamCard />
             <Button
               variant="dark"
               onClick={logout}
-              className="d-flex btn-sm align-items-center justify-content-center gap-2 mx-4"
+              className="d-flex btn-sm align-items-center justify-content-center gap-2 mx-3"
             >
               <BsBoxArrowRight /> Log Out
             </Button>

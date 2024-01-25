@@ -30,9 +30,17 @@ routes.get('/api', (req, res) => {
  */
 // Email CCTV routes
 routes.get('/process-emails-cctv', authRequired, emailCctv.readAndProcessUnreadEmails);
-routes.get('/tests/counts', authRequired, testController.getCountOfTests);
-routes.get('/events', authRequired, eventController.getEvents);
-routes.get('/tests', authRequired, testController.getAllTests);
+routes.get('/tests/samsung/counts', authRequired, testController.getCountOfTestSamsung);
+routes.get('/events/samsung', authRequired, eventController.getEventsSamsung);
+routes.get('/tests/hv/counts', authRequired, testController.getCountOfTestHv);
+routes.get('/tests/samsung', authRequired, testController.getTestSamsung);
+routes.get('/events/hv', authRequired, eventController.getEventsHv);
+routes.get('/tests/hv', authRequired, testController.getTestHv);
+routes.get('/events/samsung/last', authRequired, eventController.getLastEventsSamsung);
+routes.get('/events/hv/last', authRequired, eventController.getLastEventsHv);
+
+
+// Email Send Email routes
 routes.post('/send-email', authRequired, async (req, res) => {
   const { recipient, subject, message } = req.body;
   const result = await sendEmailController.sendEmail(recipient, subject, message);

@@ -1,7 +1,21 @@
 import axios from "./axios";
 
-export const events = async () => {
-  const { data } = await axios.get("/events");
+export const eventsHv = async () => {
+  const { data } = await axios.get("/events/hv");
   return data;
-};
+}
 
+export const eventsSamsung = async () => {
+  const { data } = await axios.get("/events/samsung");
+  return data;
+}
+
+export const lastEventsHv = async (limit = 5) => {
+  const { data } = await axios.get(`/events/hv/last?limit=${limit}`);
+  return data;
+}
+
+export const lastEventsSamsung = async (limit = 5) => {
+  const { data } = await axios.get(`/events/samsung/last?limit=${limit}`);
+  return data;
+}

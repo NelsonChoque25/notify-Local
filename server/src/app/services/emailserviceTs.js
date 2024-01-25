@@ -3,9 +3,9 @@ const { simpleParser } = require("mailparser");
 const Imap = require("imap");
 require("dotenv").config();
 
-/* 
-** Configuración de la conexión IMAP
-*/
+/*
+ ** Configuración de la conexión IMAP
+ */
 const config = {
   user: process.env.EMAIL_USER_TS,
   password: process.env.EMAIL_PASSWORD_TS,
@@ -40,7 +40,7 @@ const getEmailData = () => {
   imap.connect();
 };
 
-// Función para obtener los mensajes no leídos 
+// Función para obtener los mensajes no leídos
 const getAndFlagUnreadMessages = async () => {
   return new Promise((resolve, reject) => {
     const imap = new Imap(config);

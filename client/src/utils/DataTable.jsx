@@ -10,8 +10,7 @@ function DataTableBase(props) {
     rowsPerPageText: 'Filas por página',
     rangeSeparatorText: 'de',
     selectAllRowsItem: true,
-    selectAllRowsItemText: 'Todos',
-    paginationDefaultPage: 5,
+    selectAllRowsItemText: 'Todos'
 };
 
   useEffect(() => {
@@ -55,7 +54,6 @@ function DataTableBase(props) {
       pagination
       paginationComponentOptions={paginationComponentOptions}
       paginationRowsPerPageOptions={[5, 10, 20, 50, 100]} 
-      paginationPerPage={10}
       customStyles={customStyles}
       {...props}
     />

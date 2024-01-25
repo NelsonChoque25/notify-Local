@@ -4,6 +4,7 @@ import Logo from "../../assets/img/logo.jpg";
 import { FaBell } from "react-icons/fa";
 import { BiMenu } from "react-icons/bi";
 import PropTypes from "prop-types";
+import "./header.css";
 
 const Header = ({ handleShow, handleClose }) => {
 
@@ -35,7 +36,7 @@ const Header = ({ handleShow, handleClose }) => {
           </Nav.Link>
         </Nav>
         <Nav className=" align-items-center fs-5">
-          <Nav.Link href="#">
+          <Nav.Link href="#" className="me-2">
             <FaBell />
           </Nav.Link>
           <NavDropdown
@@ -47,7 +48,7 @@ const Header = ({ handleShow, handleClose }) => {
                 width="30"
               />
             }
-            className="me-2"
+            className="me-2 custom-nav-dropdown"
             style={{ color: "#000" }}
           >
             <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>

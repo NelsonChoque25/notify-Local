@@ -1,22 +1,21 @@
-
 .sidebar {
-  max-width: 300px !important;
+  max-width: 18.75rem !important;
 }
 
-.sidebar-link{
-  padding: 5px 15px;
-  margin: 2px 5px ;
+.sidebar-link {
+  padding: .625rem 1.625rem;
+  margin: 1.25rem;
 }
 
 .sidebar-link:hover {
   background: #1266f10d;
-  border-radius: 5px;
+  border-radius: .3125rem;
 }
 
 .dropdown-sidebar a {
   display: flex;
   align-items: center;
-  gap: 60px;
+  gap: 3.75rem;
 }
 
 .dropdown-sidebar a > span {
@@ -27,7 +26,7 @@
 
 .sidebar-link.active {
   background: #1266f10d;
-  border-radius: 5px;
+  border-radius: .3125rem;
   color: blue !important;
 }
 
