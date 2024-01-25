@@ -38,6 +38,7 @@ routes.get('/events/hv', authRequired, eventController.getEventsHv);
 routes.get('/tests/hv', authRequired, testController.getTestHv);
 routes.get('/events/samsung/last', authRequired, eventController.getLastEventsSamsung);
 routes.get('/events/hv/last', authRequired, eventController.getLastEventsHv);
+routes.get('/tests/hv/duplicates', authRequired, testController.removeDuplicateTestHv);
 
 
 // Email Send Email routes

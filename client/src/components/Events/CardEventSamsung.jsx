@@ -44,7 +44,7 @@ const CardEventSamsung = () => {
               Number of Events to Display:
             </Form.Label>
             <Col sm={6} md={6} lg={6}>
-              <Form.Select value={eventLimit} onChange={handleLimitChange}>
+              <Form.Select value={eventLimit} onChange={handleLimitChange} id="select-samsung">
                 <option value="2">2</option>
                 <option value="4">4</option>
                 <option value="6">6</option>
@@ -58,29 +58,28 @@ const CardEventSamsung = () => {
           <Col key={index} lg={6} md={12}>
             <Card className="mb-4 shadow bg-blue text-bg-primary p-2 ">
               <Card.Body>
-                <Card.Title className="card-title bg-light text-primary px-2 py-1 rounded-3 ">
+                <Card.Title className="bg-light text-primary px-2 py-1 rounded-3 ">
                   {event.name}
                 </Card.Title>
-                <Card.Text className="card-text px-2 fs-5">
+                <Card.Text className="px-2 fs-5">
                   Mac Address: &nbsp;
                   {event.macAddress}
                 </Card.Text>
-                <Card.Text className="card-text px-2 fs-5">
+                
                   Eventname: &nbsp;
                   {event.eventName && (
-                    <ul>
+                    <div className="px-2">
                       {Object.entries(JSON.parse(event.eventName)).map(
                         ([key, value]) => (
-                          <li key={key}>
-                            <strong>{key}:</strong>
-                            <pre>{value}</pre>
-                          </li>
+                          <pre key={key}>
+                            <span>{key}:</span>
+                            {value}
+                          </pre>
                         )
                       )}
-                    </ul>
+                    </div>
                   )}
-                </Card.Text>
-                <Card.Text className="card-text px-2">
+                <Card.Text className="px-2">
                   Date: &nbsp;
                   {formatDate(event.dateTime)}
                 </Card.Text>

@@ -47,6 +47,7 @@ const CardEventHv = () => {
             <Form.Select
               value={eventLimit}
               onChange={handleLimitChange}
+              id="select-hikvision"
             >
               <option value="2">2</option>
               <option value="4">4</option>
@@ -68,10 +69,12 @@ const CardEventHv = () => {
                   Event Type: &nbsp;
                   {event.eventType}
                 </Card.Text>
+                {event.cameraName && (
                 <Card.Text className="card-text px-2">
                   Camera Name: &nbsp;
-                  {event.cameraName}<
-                    /Card.Text>
+                  {event.cameraName}
+                </Card.Text>
+                )}
                 <Card.Text className="card-text px-2">
                   Event Time: &nbsp;
                   {formatDate(event.eventTime)}

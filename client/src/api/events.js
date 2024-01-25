@@ -19,3 +19,8 @@ export const lastEventsSamsung = async (limit = 5) => {
   const { data } = await axios.get(`/events/samsung/last?limit=${limit}`);
   return data;
 }
+
+export const removeDuplicateTestHv = async () => {
+  const { data } = await axios.get("/tests/hv/duplicates");
+  return data;
+}

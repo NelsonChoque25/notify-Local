@@ -1,22 +1,27 @@
+import ProcessEmails from "../AlertCctv/ProcessEmails";
 import CardEventSamsung from "../Events/CardEventSamsung";
+import RemoveDuplicated from "../Tests/RemoveDuplicated";
 import CardEventHv from "../Events/CardEventHv";
+import TestSamsung from "../Tests/TestSamsung";
 import { Row, Col } from "react-bootstrap";
 import TestHv from "../Tests/TestHv";
-import TestSamsung from "../Tests/TestSamsung";
 import "./Home.css";
 
 const Home = () => {
-  
   return (
     <>
       <Row>
         <Col lg={6}>
           <CardEventHv />
-          <TestHv/>
+          <TestHv />
         </Col>
         <Col lg={6}>
           <CardEventSamsung />
-          <TestSamsung/>
+          <TestSamsung />
+        </Col>
+        <Col lg={12}>
+          <RemoveDuplicated />
+          <ProcessEmails />
         </Col>
       </Row>
     </>
