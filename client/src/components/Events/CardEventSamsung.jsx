@@ -68,16 +68,16 @@ const CardEventSamsung = () => {
                 <Card.Text className="card-text px-2 fs-5">
                   Eventname: &nbsp;
                   {event.eventName && (
-                    <>
+                    <ul>
                       {Object.entries(JSON.parse(event.eventName)).map(
                         ([key, value]) => (
-                          <div key={key}>
+                          <li key={key}>
                             <strong>{key}:</strong>
                             <pre>{value}</pre>
-                          </div>
+                          </li>
                         )
                       )}
-                    </>
+                    </ul>
                   )}
                 </Card.Text>
                 <Card.Text className="card-text px-2">
