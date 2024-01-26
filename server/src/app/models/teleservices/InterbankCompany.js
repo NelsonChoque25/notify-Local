@@ -1,9 +1,9 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const sequelize = require("../../../config/database");
 
-class BcpAlert extends Model {}
+class InterbankCompany extends Model {}
 
-BcpAlert.init(
+InterbankCompany.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -19,17 +19,25 @@ BcpAlert.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    account: {
+    accountCharge: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    accountDestination: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    numberApplication: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     amount: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    message: {
-      type: DataTypes.STRING,
-      allowNull: true,
     },
     dateTime: {
       type: DataTypes.DATE,
@@ -38,10 +46,10 @@ BcpAlert.init(
   },
   {
     sequelize,
-    modelName: "BcpAlert",
-    tableName: "BcpAlerts",
+    modelName: "InterbankCompany",
+    tableName: "InterbankCompanys",
     timestamps: false,
   }
 );
 
-module.exports = BcpAlert;
+module.exports = InterbankCompany;

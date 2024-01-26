@@ -1,5 +1,5 @@
 // emailService.js
-const { processBcpAlertsEmail, processBcpNotificationsEmail } = require('./emailParsingServiceTs');
+const { processBcpAlertsEmail, processBcpNotificationsEmail, processInterbankCompanysEmail, processBcpOwnCompanyEmail } = require('./emailParsingServiceTs');
 const { parseEmailSubject, extractEmailDateTime } = require('../utils/emailUtils');
 const { simpleParser } = require("mailparser");
 const Imap = require("imap");
@@ -207,9 +207,11 @@ const processAndSaveEmails = async () => {
       if (subject == "Transferencia a su favor por Telecrédito") {
         await processBcpAlertsEmail(parsedEmail, emailDate);
       }else if (subject == "Transferencia a su favor desde Telecrédito BCP"){
-        // Manejo para casos en los que el asunto no coincide
         await processBcpNotificationsEmail(parsedEmail, emailDate);
-        // Puedes agregar aquí lógica adicional o simplemente registrar la discrepancia
+      }else if (subject == "Constancia de Transferencia a terceros"){
+        await processInterbankCompanysEmail(parsedEmail, emailDate);
+      }else if (subject == "Constancia de Transferencia a cuentas propias o a terceros - BCP"){
+        await processBcpOwnCompanyEmail(parsedEmail, emailDate);
       }
       /* else if (subject.includes("TEST MESSAGE FROM:")) {
         await processTestHvEmail(parsedEmail, senderName);
