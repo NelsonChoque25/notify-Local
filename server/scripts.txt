@@ -10,13 +10,16 @@ npx sequelize-cli db:seed:all
 
 <======================================================>
 
-Cmd Tables
+Cmd Tables 
 npx sequelize-cli migration:generate --name create-users
 npx sequelize-cli migration:generate --name create-eventsHv
 npx sequelize-cli migration:generate --name create-testsHv
-npx sequelize-cli migration:generate --name create-bcpAlerts
-npx sequelize-cli migration:generate --name create-bcpNotify
 npx sequelize-cli migration:generate --name create-eventsSamsung
 npx sequelize-cli migration:generate --name create-testsSamsung
+
+npx sequelize-cli migration:generate --name create-interbankCompany
+npx sequelize-cli migration:generate --name create-bcpAlert
+npx sequelize-cli migration:generate --name create-bcpNotify
+npx sequelize-cli migration:generate --name create-bcpOwnAccounts
 <======================================================>
 

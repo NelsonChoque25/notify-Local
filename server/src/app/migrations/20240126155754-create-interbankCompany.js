@@ -1,10 +1,9 @@
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
-
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('BcpAlerts', {
+    await queryInterface.createTable('InterbankCompanys', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -19,16 +18,24 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      account:{
+      accountCharge:{
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      accountDestination:{
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      status:{
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      numberApplication:{
         allowNull: false,
         type: Sequelize.STRING
       },
       amount:{
         allowNull: false,
-        type: Sequelize.STRING
-      },
-      message:{
-        allowNull: true,
         type: Sequelize.STRING
       },
       dateTime:{
@@ -39,6 +46,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('BcpAlerts');
+    await queryInterface.dropTable('InterbankCompany');
   }
 };
