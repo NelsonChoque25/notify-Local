@@ -9,6 +9,11 @@ const parseEmailSubject = (parsedEmail) => {
   return parsedEmail.subject;
 };
 
+//Extraemos hora y fecha del correo
+const extractEmailDateTime = (parsedEmail) => {
+  return parsedEmail.date;
+};
+
 // Extraer datos del cuerpo del correo utilizando una expresión regular
 const extractDataFromBody = (body, regex) => {
   const match = body.match(regex);
@@ -19,4 +24,5 @@ module.exports = {
   extractSenderName,
   parseEmailSubject,
   extractDataFromBody,
+  extractEmailDateTime,
 };
