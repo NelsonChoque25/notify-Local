@@ -1,15 +1,16 @@
-const emailServiceCCtv = require('./app/services/emailServiceCctv');
-const emailServiceTs = require('./app/services/emailServiceTs');
 const cookieParser = require('cookie-parser');
 const routes = require('./routes/routes');
 const express = require('express');
 const morgan = require('morgan');
+const e = require('express');
 const cors = require('cors');
 const path = require('path');
 const http = require('http');
-const e = require('express');
+require('dotenv').config();
 const app = express();
-const port = 5000;
+
+// Puerto de la aplicación
+const port = process.env.PORT || 5000;
 
 
 // Middlewares
@@ -34,16 +35,43 @@ app.use(
 );
 
 
+/**
+ * Socket
+ */
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+});
+
+// Socket events
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.emit('mensaje', 'Bienvenido!');
+
+  socket.on('prueba', (msg) => {
+    console.log(msg); 
+  });
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
+
+// Socket middleware
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
+
+
 /*Routers*/
 app.use('/api/v1', routes);
 
-// Inicialización del servidor
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server listening on port ${port}!`);
 });
-
-// Función para obtener los datos del email
-emailServiceCCtv.getEmailData();
-console.log("--------------------------------------------------")
-emailServiceTs.getEmailData();
-

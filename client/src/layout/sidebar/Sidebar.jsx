@@ -1,11 +1,11 @@
 import { Offcanvas, Nav, Button } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
 import { BsBoxArrowRight } from "react-icons/bs";
-import { NavLink } from "react-router-dom";
-import PropTypes from "prop-types";
 import Logo from "../../assets/img/logo.png";
-import { FaHome } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
+import { FaChartBar, FaTasks } from "react-icons/fa";
 import TeamCard from "./TeamCard";
+import PropTypes from "prop-types";
 import "./sidebar.css";
 
 const Sidebar = ({ show, handleClose }) => {
@@ -47,11 +47,20 @@ const Sidebar = ({ show, handleClose }) => {
         <hr />
         <Offcanvas.Body className="p-3">
           <Nav defaultActiveKey="/home" className="flex-column">
+            <NavLink to="/" className="sidebar-link my-1">
+              <h5 className="text-primary-emphasis d-flex align-items-center gap-2">
+                <FaChartBar />
+                Home
+              </h5>
+            </NavLink>
             <NavLink
-              to="/"
-              className="sidebar-link d-flex flex-column align-items-center my-2 gap-4 fs-6"
+              to="/events"
+              className="sidebar-link my-1"
             >
-              <FaHome size={30} />
+              <h5 className="text-primary-emphasis d-flex align-items-center gap-2">
+                <FaTasks />
+                Events
+              </h5>
             </NavLink>
             <hr />
             <TeamCard />

@@ -66,8 +66,8 @@ const removeDuplicateTestHv = async (req, res) => {
 
 module.exports = {
   getTestHv,
-  getCountOfTestHv,
   getTestSamsung,
+  getCountOfTestHv,
   getCountOfTestSamsung,
   removeDuplicateTestHv,
 };
