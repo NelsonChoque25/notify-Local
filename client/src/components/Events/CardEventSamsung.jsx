@@ -39,7 +39,7 @@ const CardEventSamsung = () => {
         </div>
 
         <Col md={12} className="mb-3">
-          <Form.Group as={Row} controlId="eventLimitSelect">
+          <Form.Group as={Row}>
             <Form.Label column sm={6} md={6} lg={6}>
               Number of Events to Display:
             </Form.Label>
@@ -79,6 +79,7 @@ const CardEventSamsung = () => {
                       )}
                     </div>
                   )}
+
                 <Card.Text className="px-2">
                   Date: &nbsp;
                   {formatDate(event.dateTime)}
