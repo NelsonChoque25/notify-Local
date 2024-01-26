@@ -1,4 +1,6 @@
 // emailService.js
+const { processBcpAlertsEmail, processBcpNotificationsEmail } = require('./emailParsingServiceTs');
+const { parseEmailSubject, extractEmailDateTime } = require('../utils/emailUtils');
 const { simpleParser } = require("mailparser");
 const Imap = require("imap");
 require("dotenv").config();
@@ -19,7 +21,7 @@ const getEmailData = () => {
   const imap = new Imap(config);
 
   imap.once("ready", () => {
-    imap.openBox("INBOX", false, (err, box) => {
+    imap.openBox("BCP", false, (err, box) => {
       if (err) {
         console.error("Error al abrir la bandeja de entrada:", err);
         return;
@@ -47,7 +49,7 @@ const getAndFlagUnreadMessages = async () => {
     let emails = [];
 
     imap.once("ready", () => {
-      imap.openBox("INBOX", false, (err, box) => {
+      imap.openBox("BCP", false, (err, box) => {
         if (err) {
           console.error("Error opening the inbox:", err);
           reject(err);
@@ -118,7 +120,7 @@ const markMessageAsRead = async (uid) => {
     const imap = new Imap(config);
 
     imap.once("ready", () => {
-      imap.openBox("INBOX", false, (err) => {
+      imap.openBox("BCP", false, (err) => {
         if (err) {
           reject(err);
           return;
@@ -143,4 +145,86 @@ const markMessageAsRead = async (uid) => {
   });
 };
 
-module.exports = { getEmailData, getAndFlagUnreadMessages, markMessageAsRead };
+
+/*
+const processAndSaveEmails2 = async () => {
+  try {
+    const emails = await getAndFlagUnreadMessages();
+    for (const { uid, message } of emails) {
+      const parsedEmail = await simpleParser(message);
+      const subject = parsedEmail.subject;
+      const senderInfo = parsedEmail.from.text;
+      const senderEmail = senderInfo.match(/<(.*)>/)?.[1];
+
+      if (senderEmail == "ALERTASYAVISOS@BCP.COM.PE") {
+        const body = parsedEmail.text;
+        const extractMatch = (regex) => {
+          const match = body.match(regex);
+          return match && match[1] ? match[1].trim() : "";
+        };
+
+        const orderingCompany = extractMatch(/Empresa ordenante:\s*(.*)/);
+        const dateTime = extractMatch(/Fecha y hora:\s*(.*)/);
+        const beneficiary = extractMatch(/Beneficiario:\s*(.*)/);
+        const account = extractMatch(/N° de cuenta:\s*(.*)/);
+        const amount = extractMatch(/Importe:\s*(.*)/);
+        const message = extractMatch(/Mensaje:\s*(.*)/);
+        const dateTimeToSave = dateTime ? new Date(dateTime) : new Date();
+
+        const newAlert = await BcpAlerts.create({
+          orderingCompany,
+          beneficiary,
+          account,
+          amount,
+          message,
+          dateTime: dateTimeToSave,
+        });
+
+        console.log(newAlert.get({ plain: true }));
+      } else {
+        console.log("Email not processed:", subject);
+      }
+
+      await markMessageAsRead(uid);
+    }
+
+    console.log("Emails processed and saved correctly.");
+  } catch (error) {
+    console.error("Error processing and saving emails:", error);
+  }
+};*/
+
+const processAndSaveEmails = async () => {
+  try {
+    const emails = await getAndFlagUnreadMessages();
+    for (const { uid, message } of emails) {
+      const parsedEmail = await simpleParser(message);
+      const subject = parseEmailSubject(parsedEmail);
+      //const senderName = extractSenderName(parsedEmail);
+      const emailDate = extractEmailDateTime(parsedEmail);
+
+
+      if (subject == "Transferencia a su favor por Telecrédito") {
+        await processBcpAlertsEmail(parsedEmail, emailDate);
+      }else if (subject == "Transferencia a su favor desde Telecrédito BCP"){
+        // Manejo para casos en los que el asunto no coincide
+        await processBcpNotificationsEmail(parsedEmail, emailDate);
+        // Puedes agregar aquí lógica adicional o simplemente registrar la discrepancia
+      }
+      /* else if (subject.includes("TEST MESSAGE FROM:")) {
+        await processTestHvEmail(parsedEmail, senderName);
+      } else if (subject.includes("Embedded Net DVR")) {
+        await processEventHvEmail(parsedEmail, senderName);
+      } */
+      
+
+      await markMessageAsRead(uid);
+    }
+    console.log("Correos procesados y guardados correctamente.");
+  } catch (error) {
+    console.error("Error al procesar y guardar correos:", error);
+    throw error;
+  }
+};
+
+module.exports = { getEmailData, getAndFlagUnreadMessages, markMessageAsRead, processAndSaveEmails };
