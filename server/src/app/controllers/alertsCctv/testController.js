@@ -43,24 +43,44 @@ const getCountOfTestSamsung = async (req, res) => {
 };
 
 const removeDuplicateTestHv = async (req, res) => {
+  
+ delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+  const io = req.io;
+
   try {
     const duplicates = await TestHv.findAll({
-      attributes: ['name'],
-      group: ['name'],
-      having: sequelize.literal('COUNT(*) > 1'),
+      attributes: ["name"],
+      group: ["name"],
+      having: sequelize.literal("COUNT(*) > 1"),
     });
+
+    io.emit("totalDuplicates", { total: duplicates.length });
 
     for (const duplicate of duplicates) {
       await TestHv.destroy({
         where: { name: duplicate.name },
         limit: duplicates.length - 1,
       });
+
+      await delay(1000);
     }
 
-    res.status(200).json({ message: "Registros duplicados eliminados con éxito" });
+    io.emit("allDuplicatesRemoved");
+    
+
+    res
+      .status(200)
+      .json({ message: "Registros duplicados eliminados con éxito" });
+
   } catch (error) {
-    console.error("Error al eliminar registros duplicados de Test Hikvision:", error);
-    res.status(500).send("Error al eliminar registros duplicados de Test Hikvision.");
+    console.error(
+      "Error al eliminar registros duplicados de Test Hikvision:",
+      error
+    );
+    res
+      .status(500)
+      .send("Error al eliminar registros duplicados de Test Hikvision.");
   }
 };
 

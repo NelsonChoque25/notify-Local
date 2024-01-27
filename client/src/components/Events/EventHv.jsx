@@ -61,6 +61,7 @@ const Home = () => {
         columns={columns}
         data={eventsData}
         paginationPerPage={5}
+        className="shadow"
       />
     </>
   );

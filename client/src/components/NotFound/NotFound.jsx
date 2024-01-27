@@ -33,7 +33,7 @@ const NotFound = () => {
                 Página no encontrada.
               </p>
               <p className="lead">La página que estás buscando no existe.</p>
-              <Button href="/" variant="dark" className="rounded-0">
+              <Button href="/" className="rounded-0">
                 Ir a Inicio
               </Button>
             </Col>

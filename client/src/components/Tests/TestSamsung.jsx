@@ -1,4 +1,4 @@
-import { testSamsung, testCountSamsung  } from "../../api/tests";
+import { testSamsung, testCountSamsung } from "../../api/tests";
 import logoSamsung from "../../assets/img/samsung.png";
 import { formatDate } from "../../utils/DateUtils";
 import DataTableBase from "../../utils/DataTable";
@@ -8,7 +8,6 @@ import { MdApps } from "react-icons/md";
 const Home = () => {
   const [testsCountData, setTestsCountData] = useState(0);
   const [testData, setTestData] = useState([]);
-  
 
   useEffect(() => {
     const fetchTestsHvData = async () => {
@@ -70,14 +69,23 @@ const Home = () => {
 
   return (
     <>
-          <img
+      <img
         className="float-end m-2"
         src={logoSamsung}
         alt="Hikvision"
         width="100"
       />
-    <h4 className="text-primary-emphasis m-2">Tests Samsung: {testsCountData.count}</h4>
-      <DataTableBase columns={columns} data={testData} paginationPerPage={5}/>
+      <h4 className="text-primary-emphasis m-2">
+        Tests Samsung: {testsCountData.count}
+      </h4>
+      <DataTableBase
+        columns={columns}
+        data={testData}
+        paginationPerPage={5}
+        className="shadow"
+        highlightOnHover
+        responsive
+      />
     </>
   );
 };

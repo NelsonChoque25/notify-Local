@@ -1,3 +1,21 @@
+/* header.css */
+
 .custom-nav-dropdown .dropdown-toggle::after {
   display: none;
+}
+
+/* Switch */
+
+/* Estilo para el contenedor personalizado del interruptor */
+.custom-switch {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Estilo para el divisor horizontal */
+.vertical-divider {
+  border: 0;
+  border-left: 1px solid #989797; /* Color y estilo del divisor */
+  height: 24px; /* Altura del divisor (ajusta según sea necesario) */
 }

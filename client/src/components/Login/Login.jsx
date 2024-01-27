@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
 import { Button, Form, Container, Row, Col, Card } from "react-bootstrap";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/img/logo.png";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "./Login.css";
 
@@ -38,12 +38,12 @@ const Login = () => {
             alt="Logo"
           />
           <Card className="login-card rounded-5 shadow p-4">
-            <Card.Header className="header-login fs-2 text-center fw-bold">
-              Log In
-            </Card.Header>
+            <Card.Title className="text-center my-4 fs-2 my-5 fw-bold">
+              Login
+              </Card.Title>
             <Card.Body>
               <Form onSubmit={handleSubmit(onSubmit)}>
-                <Form.Group className="mb-2">
+                <Form.Group className="mb-4">
                   <Form.Label>Email</Form.Label>
                   <Form.Control
                     type="email"

@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import { FaChartBar, FaTasks } from "react-icons/fa";
 import TeamCard from "./TeamCard";
 import PropTypes from "prop-types";
-import "./sidebar.css";
+import "./Sidebar.css";
 
 const Sidebar = ({ show, handleClose }) => {
   const { logoutUser } = useAuth();
@@ -45,27 +45,30 @@ const Sidebar = ({ show, handleClose }) => {
           </a>
         </Offcanvas.Header>
         <hr />
-        <Offcanvas.Body className="p-3">
+        <Offcanvas.Body className="p-2">
           <Nav defaultActiveKey="/home" className="flex-column">
+            <h6 className="text-primary-emphasis sidebar-header">
+              Admin Elements
+            </h6>
             <NavLink to="/" className="sidebar-link my-1">
-              <h5 className="text-primary-emphasis d-flex align-items-center gap-2">
+              <h6 className="text-primary-emphasis d-flex align-items-center gap-2">
                 <FaChartBar />
                 Home
-              </h5>
+              </h6>
             </NavLink>
-            <NavLink
-              to="/events"
-              className="sidebar-link my-1"
-            >
-              <h5 className="text-primary-emphasis d-flex align-items-center gap-2">
+            <NavLink to="/events" className="sidebar-link my-1">
+              <h6 className="text-primary-emphasis d-flex align-items-center gap-2">
                 <FaTasks />
                 Events
-              </h5>
+              </h6>
             </NavLink>
+            <hr />
+            <h6 className="text-primary-emphasis sidebar-header">
+              Users Managment
+            </h6>
             <hr />
             <TeamCard />
             <Button
-              variant="dark"
               onClick={logout}
               className="d-flex btn-sm align-items-center justify-content-center gap-2 mx-3"
             >

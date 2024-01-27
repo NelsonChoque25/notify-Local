@@ -1,4 +1,5 @@
 const eventController = require('../app/controllers/alertsCctv/eventController'); 
+const CustomThemeController = require('../app/controllers/CustomThemeController');
 const emailCctv = require('../app/controllers/alertsCctv/emailControllerCctv');
 const testController = require('../app/controllers/alertsCctv/testController');
 const emailTs = require('../app/controllers/teleservices/emailControllerTs');
@@ -75,6 +76,8 @@ routes.put('/users/:id', validateSchema(updateUserSchema), authRequired, userCon
 routes.get('/users', authRequired, userController.getAllUsers);
 routes.get('/users/:id', authRequired, userController.getUser);
 routes.delete('/users/:id', authRequired, userController.deleteUser);
+routes.get('/users/:userId/theme', authRequired, CustomThemeController.getTheme);
+routes.put('/users/:userId/theme', authRequired, CustomThemeController.updateTheme);
 
 /**
  * @swagger 
@@ -87,5 +90,6 @@ routes.post("/auth/login", validateSchema(loginSchema), authController.Login);
 routes.post("/auth/logout", authController.Logout);
 routes.get("/profile", authRequired, authController.profile);
 routes.get("/auth/verify-token", authController.verifyToken);
+
 
 module.exports = routes;

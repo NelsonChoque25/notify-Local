@@ -1,8 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useState, useContext, useEffect } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { getTheme, updateTheme } from "../api/users";
 import * as authAPI from "../api/authAPI";
+import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import cookie from "js-cookie";
 
@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [userTheme, setUserTheme] = useState(null);
 
   const authenticateUser = (user) => {
     setCurrentUser(user);
@@ -23,35 +24,43 @@ export const AuthProvider = ({ children }) => {
       const data = await authAPI.login(email, password);
       if (data) {
         authenticateUser(data);
-        toast.success('¡Bienvenido de nuevo!');
+        toast.success("¡Bienvenido de nuevo!");
       }
     } catch (error) {
-      toast.error('Error al iniciar sesión. Por favor, inténtalo de nuevo.');
+      toast.error("Error al iniciar sesión. Por favor, inténtalo de nuevo.");
       console.error("Error during login", error);
     }
   };
 
-
   const logoutUser = async () => {
     try {
       await authAPI.logout();
-      cookie.remove('token');
+      cookie.remove("token");
       setCurrentUser(null);
       setIsAuthenticated(false);
-      toast.success('¡Hasta pronto!');
+      toast.success("¡Hasta pronto!");
     } catch (error) {
       console.error("Error al cerrar sesión: ", error);
-      toast.error('Error al cerrar sesión. Por favor, inténtalo de nuevo.');
+      toast.error("Error al cerrar sesión. Por favor, inténtalo de nuevo.");
     }
   };
 
+  const updateThemeUser = async (theme) => {
+    if (!currentUser || !currentUser.userId) return;
+    try {
+      await updateTheme(currentUser.userId, theme);
+      setUserTheme(theme);
+    } catch (error) {
+      console.error(`Error al actualizar el tema: ${error.message}`);
+      toast.error("Error al actualizar el tema");
+    }
+  };
 
   useEffect(() => {
-
     async function checkLoginStatus() {
       const cookies = cookie.get();
 
-      if(!cookies.token) {
+      if (!cookies.token) {
         setIsAuthenticated(false);
         setLoading(false);
         return setCurrentUser(null);
@@ -62,13 +71,17 @@ export const AuthProvider = ({ children }) => {
         if (!res.success) {
           setIsAuthenticated(false);
           setLoading(false);
-          return ;
+          return;
         }
 
         setIsAuthenticated(true);
         setCurrentUser(res);
         setLoading(false);
 
+        const theme = await getTheme(res.userId);
+        setUserTheme(theme);
+
+        console.log("theme", theme);
       } catch (error) {
         console.log(error);
         setIsAuthenticated(false);
@@ -86,7 +99,9 @@ export const AuthProvider = ({ children }) => {
     loginUser,
     logoutUser,
     isAuthenticated,
-    loading
+    loading,
+    userTheme,
+    updateThemeUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -68,7 +68,6 @@ const EventSamsung = () => {
         data={eventsData}
         pagination
         highlightOnHover
-        striped
         responsive
       />
     </>

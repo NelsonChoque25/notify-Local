@@ -1,11 +1,10 @@
-
 import { Route, Routes, Navigate } from "react-router-dom";
 import RouteTransition from "../utils/RouteTransition";
-import ProtectedRoute from "./ProtectedRoute";
 import NotFound from "../components/NotFound/NotFound";
+import Events from "../components/Events/Events";
+import ProtectedRoute from "./ProtectedRoute";
 import Login from "../components/Login/Login";
 import Home from "../components/Home/Home";
-import Events from "../components/Events/Events";
 
 const AppRoutes = () => (
   <Routes>
@@ -26,8 +25,7 @@ const AppRoutes = () => (
           </RouteTransition>
         }
       />
-    </Route>
-    <Route
+      <Route
         path="/events"
         element={
           <RouteTransition>
@@ -35,7 +33,7 @@ const AppRoutes = () => (
           </RouteTransition>
         }
       />
-    <Route
+      <Route
         path="*"
         element={
           <RouteTransition>
@@ -43,6 +41,7 @@ const AppRoutes = () => (
           </RouteTransition>
         }
       />
+    </Route>
     <Route path="*" element={<Navigate to="/login" />} />
   </Routes>
 );

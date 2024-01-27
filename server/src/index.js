@@ -68,7 +68,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
 /*Routers*/
 app.use('/api/v1', routes);
 

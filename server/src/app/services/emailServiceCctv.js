@@ -1,13 +1,17 @@
 // emailService.js
-const { processSamsungEmail, processTestHvEmail, processEventHvEmail } = require('./emailParsingService');
-const { parseEmailSubject, extractSenderName } = require('../utils/emailUtils');
+const {
+  processSamsungEmail,
+  processTestHvEmail,
+  processEventHvEmail,
+} = require("./emailParsingService");
+const { parseEmailSubject, extractSenderName } = require("../utils/emailUtils");
 const { simpleParser } = require("mailparser");
 const Imap = require("imap");
 require("dotenv").config();
 
-/* 
-** Configuración de la conexión IMAP
-*/
+/*
+ ** Configuración de la conexión IMAP
+ */
 const config = {
   user: process.env.EMAIL_USER_CCTV,
   password: process.env.EMAIL_PASSWORD_CCTV,
@@ -42,7 +46,7 @@ const getEmailData = () => {
   imap.connect();
 };
 
-// Función para obtener los mensajes no leídos 
+// Función para obtener los mensajes no leídos
 const getAndFlagUnreadMessages = async () => {
   return new Promise((resolve, reject) => {
     const imap = new Imap(config);
@@ -146,9 +150,13 @@ const markMessageAsRead = async (uid) => {
 };
 
 // Función para procesar y guardar los correos electrónicos
-const processAndSaveEmails = async () => {
+const processAndSaveEmails = async (io) => {
   try {
     const emails = await getAndFlagUnreadMessages();
+
+    // Emitir un evento con la cantidad total de correos por procesar
+    io.emit("totalEmailsToProcess", { total: emails.length });
+
     for (const { uid, message } of emails) {
       const parsedEmail = await simpleParser(message);
       const subject = parseEmailSubject(parsedEmail);
@@ -160,11 +168,16 @@ const processAndSaveEmails = async () => {
         await processTestHvEmail(parsedEmail, senderName);
       } else if (subject.includes("Embedded Net DVR")) {
         await processEventHvEmail(parsedEmail, senderName);
-      } 
+      }
 
       await markMessageAsRead(uid);
+
+      io.emit("emailProcessed", { uid, subject });
     }
     console.log("Correos procesados y guardados correctamente.");
+
+    io.emit("allEmailsProcessed");
+    
   } catch (error) {
     console.error("Error al procesar y guardar correos:", error);
     throw error;

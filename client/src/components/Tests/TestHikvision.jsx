@@ -4,12 +4,10 @@ import { formatDate } from "../../utils/DateUtils";
 import DataTableBase from "../../utils/DataTable";
 import { useEffect, useState } from "react";
 import { MdApps } from "react-icons/md";
-
-const Home = () => {
+const TestHikvision = () => {
   const [testsCountData, setTestsCountData] = useState(0);
   const [testData, setTestData] = useState([]);
   
-
   useEffect(() => {
     const fetchTestsHvData = async () => {
       try {
@@ -71,9 +69,9 @@ const Home = () => {
         width="100"
       />
     <h4 className="text-primary-emphasis m-2">Tests Hikvision: {testsCountData.count}</h4>
-      <DataTableBase columns={columns} data={testData} paginationPerPage={5}/>
+      <DataTableBase columns={columns} data={testData} paginationPerPage={5} className="shadow"/>
     </>
   );
 };
 
-export default Home;
+export default TestHikvision;

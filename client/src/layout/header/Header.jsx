@@ -1,13 +1,12 @@
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown, Form } from "react-bootstrap";
+import { FaBell, FaSun, FaMoon } from "react-icons/fa";
 import { useAuth } from "../../contexts/AuthContext";
 import Logo from "../../assets/img/logo.jpg";
-import { FaBell } from "react-icons/fa";
 import { BiMenu } from "react-icons/bi";
 import PropTypes from "prop-types";
-import "./header.css";
+import "./Header.css";
 
-const Header = ({ handleShow, handleClose }) => {
-
+const Header = ({ handleShow, handleClose, darkMode, toggleDarkMode }) => {
   const { logoutUser } = useAuth();
 
   const logout = async () => {
@@ -22,6 +21,7 @@ const Header = ({ handleShow, handleClose }) => {
   return (
     <Navbar className="shadow">
       <Container fluid>
+        {/* Right Items */}
         <Navbar.Brand href="/" className="mx-2">
           <img
             alt="Logo"
@@ -35,10 +35,30 @@ const Header = ({ handleShow, handleClose }) => {
             <BiMenu size={25} />
           </Nav.Link>
         </Nav>
-        <Nav className=" align-items-center fs-5">
-          <Nav.Link href="#" className="me-2">
+        {/* Left Items */}
+        <Nav className="align-items-center fs-5">
+          <Nav.Item className="mx-2">
+            <Form>
+              <Form.Check
+                className="custom-switch"
+                type="switch"
+                id="custom-switch"
+                checked={darkMode}
+                onChange={toggleDarkMode}
+                label={
+                  darkMode ? (
+                    <FaMoon className="text-light" />
+                  ) : (
+                    <FaSun className="text-warning" />
+                  )
+                }
+              />
+            </Form>
+          </Nav.Item>
+          <Nav.Link href="#" className="mx-2">
             <FaBell />
           </Nav.Link>
+          <hr className="vertical-divider me-2" />
           <NavDropdown
             align="end"
             title={
@@ -48,13 +68,15 @@ const Header = ({ handleShow, handleClose }) => {
                 width="30"
               />
             }
-            className="me-2 custom-nav-dropdown"
+            className="mx-2 custom-nav-dropdown"
             style={{ color: "#000" }}
           >
             <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">Config </NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4" onClick={logout}>Logout</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.2">Config</NavDropdown.Item>
+            <NavDropdown.Divider /> {/* Separador aquí */}
+            <NavDropdown.Item href="#action/3.4" onClick={logout}>
+              Logout
+            </NavDropdown.Item>
           </NavDropdown>
         </Nav>
       </Container>
@@ -65,6 +87,8 @@ const Header = ({ handleShow, handleClose }) => {
 Header.propTypes = {
   handleShow: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
+  darkMode: PropTypes.bool.isRequired,
+  toggleDarkMode: PropTypes.func.isRequired,
 };
 
 export default Header;

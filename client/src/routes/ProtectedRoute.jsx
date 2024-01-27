@@ -2,7 +2,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { Navigate, Outlet } from "react-router-dom";
 import LoaderPage from "../utils/LoaderPage";
 import { useState, useEffect } from "react";
-import "./routes.css";
+import "./Routes.css";
 
 const ProtectedRoute = () => {
   const { isAuthenticated, loadingPage } = useAuth();
@@ -11,7 +11,7 @@ const ProtectedRoute = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoading(false);
-    }, 500);
+    }, 1000);
 
     return () => clearTimeout(timeout);
   }, []);

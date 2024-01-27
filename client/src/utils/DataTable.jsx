@@ -1,17 +1,45 @@
-import DataTable from "react-data-table-component";
+import { useContext, useEffect, useState } from "react";
+import DataTable, { createTheme } from "react-data-table-component";
 import { IoIosArrowDown } from "react-icons/io";
-import { useEffect, useState } from "react";
 import LoaderDataTable from "./LoaderDataTable";
+import DarkModeContext from "../contexts/DarkModeContext";
+
+createTheme(
+  "myDarkTheme",
+  {
+    text: {
+      primary: "#ffffff",
+      secondary: "#d3d3d3",
+    },
+    background: {
+      default: "#343a40",
+    },
+    context: {
+      background: "#cb4b16",
+      text: "#FFFFFF",
+    },
+    divider: {
+      default: "#073642",
+    },
+    action: {
+      button: "rgba(0,0,0,.54)",
+      hover: "rgba(0,0,0,.08)",
+      disabled: "rgba(0,0,0,.12)",
+    },
+  },
+  "dark"
+);
 
 function DataTableBase(props) {
+  const darkMode = useContext(DarkModeContext);
   const sortIcon = <IoIosArrowDown />;
   const [pending, setPending] = useState(true);
   const paginationComponentOptions = {
-    rowsPerPageText: 'Filas por página',
-    rangeSeparatorText: 'de',
+    rowsPerPageText: "Filas por página",
+    rangeSeparatorText: "de",
     selectAllRowsItem: true,
-    selectAllRowsItemText: 'Todos'
-};
+    selectAllRowsItemText: "Todos",
+  };
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -20,28 +48,6 @@ function DataTableBase(props) {
     return () => clearTimeout(timeout);
   }, []);
 
-  const customStyles = {
-    headRow: {
-      style: {
-        border: "none",
-      },
-    },
-    headCells: {
-      style: {
-        color: "#202124",
-        fontSize: "14px",
-      },
-    },
-    rows: {
-      highlightOnHoverStyle: {
-        backgroundColor: "rgb(230, 244, 244)",
-        borderBottomColor: "#FFFFFF",
-        borderRadius: "5px",
-        outline: "1px solid #FFFFFF",
-      },
-    },
-  };
-    
   return (
     <DataTable
       sortIcon={sortIcon}
@@ -53,8 +59,8 @@ function DataTableBase(props) {
       progressComponent={<LoaderDataTable />}
       pagination
       paginationComponentOptions={paginationComponentOptions}
-      paginationRowsPerPageOptions={[5, 10, 20, 50, 100]} 
-      customStyles={customStyles}
+      paginationRowsPerPageOptions={[5, 10, 20, 50, 100]}
+      theme={darkMode ? "myDarkTheme" : "default"}
       {...props}
     />
   );
