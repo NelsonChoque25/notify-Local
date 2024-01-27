@@ -3,6 +3,7 @@ const CustomThemeController = require('../app/controllers/CustomThemeController'
 const emailCctv = require('../app/controllers/alertsCctv/emailControllerCctv');
 const testController = require('../app/controllers/alertsCctv/testController');
 const emailTs = require('../app/controllers/teleservices/emailControllerTs');
+const eventControllerTs = require('../app/controllers/teleservices/eventControllerTs'); 
 const sendEmailController = require('../app/controllers/sendEmailController');
 const userController = require('../app/controllers/userController');
 const authController = require('../app/controllers/authController');
@@ -63,6 +64,7 @@ routes.post('/send-email', authRequired, async (req, res) => {
  */
  // Email Teleservices routes
  routes.get('/process-emails-ts', authRequired, emailTs.readAndProcessUnreadEmails);
+ routes.get('/events/bcp-alerts', authRequired, eventControllerTs.getBcpAlert);
 
 /**
  * @swagger
