@@ -3,34 +3,34 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('InterbankCompany', {
+    await queryInterface.createTable('BcpOwnAccount', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      orderingCompany:{
+      sendsTo:{
         allowNull: false,
         type: Sequelize.STRING
       },
-      beneficiary:{
+      accountSendsTo:{
         allowNull: false,
         type: Sequelize.STRING
       },
-      accountCharge:{
+      from:{
         allowNull: false,
         type: Sequelize.STRING
       },
-      accountDestination:{
+      accountFrom:{
         allowNull: false,
         type: Sequelize.STRING
       },
-      status:{
+      channel:{
         allowNull: false,
         type: Sequelize.STRING
       },
-      numberApplication:{
+      numberOperation:{
         allowNull: false,
         type: Sequelize.STRING
       },
@@ -46,6 +46,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('InterbankCompany');
+    await queryInterface.dropTable('BcpOwnAccount');
   }
 };

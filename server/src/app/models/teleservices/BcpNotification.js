@@ -1,17 +1,37 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const sequelize = require("../../../config/database");
 
-class InterbankCompany extends Model {}
+class BcpNotification extends Model {}
 
-InterbankCompany.init(
+BcpNotification.init(
   {
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true,
+      allowNull: false,
       autoIncrement: true,
+      primaryKey: true,
+    },
+    operationType: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    operationDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    operationNumber: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     orderingCompany: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    account: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    accountType: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -19,37 +39,29 @@ InterbankCompany.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    accountCharge: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    accountDestination: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    status: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    numberApplication: {
+    destinationAccount: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     amount: {
-      type: DataTypes.STRING,
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
-    dateTime: {
-      type: DataTypes.DATE,
-      allowNull: false,
+    reference: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    message: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {
     sequelize,
-    modelName: "InterbankCompany",
-    tableName: "InterbankCompany",
+    modelName: "BcpNotification",
+    tableName: "BcpNotification",
     timestamps: false,
   }
 );
 
-module.exports = InterbankCompany;
+module.exports = BcpNotification;

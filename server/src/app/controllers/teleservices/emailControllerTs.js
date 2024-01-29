@@ -1,4 +1,4 @@
-const { processAndSaveEmails } = require('../../services/emailserviceTs');
+const { processAndSaveEmails } = require('../../services/emailServiceTs');
 
 const readAndProcessUnreadEmails = async (req, res) => {
   try {

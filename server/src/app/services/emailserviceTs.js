@@ -1,7 +1,8 @@
 // emailService.js
-const { processBcpAlertsEmail, processBcpNotificationsEmail, processInterbankCompanysEmail, processBcpOwnCompanyEmail } = require('./emailParsingServiceTs');
+const { processBcpAlertsEmail, processBcpNotificationsEmail, processInterbankCompanysEmail, processBcpOwnCompanyEmail, processCNCBBVAEmail } = require('./emailParsingServiceTs');
 const { parseEmailSubject, extractEmailDateTime } = require('../utils/emailUtils');
 const { simpleParser } = require("mailparser");
+const cheerio = require('cheerio');
 const Imap = require("imap");
 require("dotenv").config();
 
@@ -198,10 +199,18 @@ const processAndSaveEmails = async () => {
   try {
     const emails = await getAndFlagUnreadMessages();
     for (const { uid, message } of emails) {
+
+    
       const parsedEmail = await simpleParser(message);
+      
+      
+     
       const subject = parseEmailSubject(parsedEmail);
       //const senderName = extractSenderName(parsedEmail);
       const emailDate = extractEmailDateTime(parsedEmail);
+      const body = parsedEmail.text;
+
+
 
 
       if (subject == "Transferencia a su favor por Telecrédito") {
@@ -212,6 +221,8 @@ const processAndSaveEmails = async () => {
         await processInterbankCompanysEmail(parsedEmail, emailDate);
       }else if (subject == "Constancia de Transferencia a cuentas propias o a terceros - BCP"){
         await processBcpOwnCompanyEmail(parsedEmail, emailDate);
+      }else if (subject.includes("CNC-BBVA") ){
+        await processCNCBBVAEmail(parsedEmail, emailDate);
       }
       /* else if (subject.includes("TEST MESSAGE FROM:")) {
         await processTestHvEmail(parsedEmail, senderName);
