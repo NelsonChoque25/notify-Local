@@ -4,7 +4,7 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('BcpNotifications', {
+    await queryInterface.createTable('BcpNotification', {
         id: {
           allowNull: false,
           autoIncrement: true,
@@ -45,7 +45,7 @@ module.exports = {
         },
         amount: {
           allowNull: false,
-          type: Sequelize.STRING
+          type: Sequelize.FLOAT
         },
         reference: {
           allowNull: true,
@@ -59,6 +59,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('BcpNotifications');
+    await queryInterface.dropTable('BcpNotification');
   }
 };
