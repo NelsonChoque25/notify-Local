@@ -27,7 +27,6 @@
 .sidebar-link.active {
   background: #1266f10d;
   border-radius: .3125rem;
-  color: blue !important;
 }
 
 .sidebar-header {

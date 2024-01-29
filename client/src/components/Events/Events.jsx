@@ -3,25 +3,25 @@ import ProcessEmails from "../AlertCctv/ProcessEmails";
 import { Row, Col, Card } from "react-bootstrap";
 import EventSamsung from "./EventSamsung";
 import EventHv from "./EventHv";
-import "./Events.css"; 
+import "./Events.css";
 
 const Events = () => {
   return (
     <>
-      <Row className="my-5 mx-2">
-        <Col lg={2} className="sidebar-divider mt-2">
-          { /*  Process Emails*/}
+      <Row className="my-4 mx-2">
+        <Col lg={2} className="mt-2 card p-4">
+          {/*  Process Emails*/}
           <h5 className="text-success"> Process Emails</h5>
           <Card className="bg-success bg-opacity-10 text-success border-0 shadow-sm">
             <Card.Body className="pt-4">
               <Card.Text>
-                En esta sección se pueden procesar los correos de los
-                eventos generados por los DVRs.
+                En esta sección se pueden procesar los correos de los eventos
+                generados por los DVRs.
               </Card.Text>
               <ProcessEmails />
             </Card.Body>
           </Card>
-          { /*  Remove Duplicated*/}
+          {/*  Remove Duplicated*/}
           <h5 className="text-primary mt-5"> Remove Duplicated</h5>
           <Card className="bg-primary bg-opacity-10 text-primary border-0 shadow-sm">
             <Card.Body className="pt-4">
@@ -33,10 +33,12 @@ const Events = () => {
           </Card>
         </Col>
         {/*  Events*/}
-        <Col lg={10}>
-          <EventHv />
-          <hr />
-          <EventSamsung />
+        <Col lg={10} className="mt-2"> 
+          <Card className="shadow-sm p-4">
+            <EventHv />
+            <hr />
+            <EventSamsung />
+          </Card>
         </Col>
       </Row>
     </>

@@ -1,8 +1,9 @@
-import { useContext, useEffect, useState } from "react";
 import DataTable, { createTheme } from "react-data-table-component";
+import DarkModeContext from "../contexts/DarkModeContext";
+import { useContext, useEffect, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import LoaderDataTable from "./LoaderDataTable";
-import DarkModeContext from "../contexts/DarkModeContext";
+
 
 createTheme(
   "myDarkTheme",
@@ -41,6 +42,7 @@ function DataTableBase(props) {
     selectAllRowsItemText: "Todos",
   };
 
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setPending(false);
@@ -61,6 +63,8 @@ function DataTableBase(props) {
       paginationComponentOptions={paginationComponentOptions}
       paginationRowsPerPageOptions={[5, 10, 20, 50, 100]}
       theme={darkMode ? "myDarkTheme" : "default"}
+      expandableRows
+      selectableRows
       {...props}
     />
   );

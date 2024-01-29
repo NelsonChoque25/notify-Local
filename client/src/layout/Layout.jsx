@@ -1,6 +1,6 @@
 import DarkModeContext from "../contexts/DarkModeContext";
 import { useAuth } from "../contexts/AuthContext";
-import CustomHeader from "./header/CustomHeader";
+import Header from "./header/Header";
 import { ToastContainer } from "react-toastify";
 import useDarkMode from "../hooks/useDarkMode";
 import { Container } from "react-bootstrap";
@@ -34,14 +34,14 @@ const Layout = () => {
         position="top-center"
         theme={darkMode ? "dark" : "light"}
       />
-      <CustomHeader
+      <Header
         handleShow={handleShow}
         handleClose={handleClose}
         darkMode={darkMode}
         toggleDarkMode={toggleDarkMode}
       />
       <Container fluid>
-        <Sidebar show={show} handleClose={handleClose} />
+        <Sidebar show={show} handleClose={handleClose}/>
         <AppRoutes />
       </Container>
     </DarkModeContext.Provider>

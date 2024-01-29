@@ -56,9 +56,9 @@ const CardEventSamsung = () => {
 
         {eventsData.map((event, index) => (
           <Col key={index} lg={6} md={12}>
-            <Card className="mb-4 shadow bg-blue text-bg-primary p-2 ">
+            <Card className="mb-4 shadow bg-primary text-bg-primary bg-opacity-75 p-2 ">
               <Card.Body>
-                <Card.Title className="bg-light text-primary px-2 py-1 rounded-3 ">
+                <Card.Title className="bg-light text-primary px-3 mb-4 py-2 rounded-3 ">
                   {event.name}
                 </Card.Title>
                 <Card.Text className="px-2 fs-5">

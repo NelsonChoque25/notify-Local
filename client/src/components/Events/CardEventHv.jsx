@@ -60,9 +60,9 @@ const CardEventHv = () => {
 
         {eventsData.map((event, index) => (
           <Col key={index} lg={6} md={12}>
-            <Card className="mb-4 shadow bg-secondary text-bg-secondary p-2 ">
+            <Card className="mb-4 shadow bg-dark text-bg-dark bg-opacity-50 p-2">
               <Card.Body>
-                <Card.Title className="card-title bg-light text-danger px-2 py-1 rounded-3 ">
+                <Card.Title className="card-title bg-secondary bg-opacity-75 text-bg-secondary px-3 mb-4 py-2 rounded-3 ">
                   {event.name}
                 </Card.Title>
                 <Card.Text className="card-text px-2 fs-5">

@@ -24,7 +24,11 @@ export const AuthProvider = ({ children }) => {
       const data = await authAPI.login(email, password);
       if (data) {
         authenticateUser(data);
-        toast.success("¡Bienvenido de nuevo!");
+
+        const theme = await getTheme(data.id);
+        setUserTheme(theme);
+        
+        toast.success("¡Bienvenido!");
       }
     } catch (error) {
       toast.error("Error al iniciar sesión. Por favor, inténtalo de nuevo.");
@@ -81,7 +85,8 @@ export const AuthProvider = ({ children }) => {
         const theme = await getTheme(res.userId);
         setUserTheme(theme);
 
-        console.log("theme", theme);
+
+
       } catch (error) {
         console.log(error);
         setIsAuthenticated(false);

@@ -1,9 +1,11 @@
 import { Button, Form, Container, Row, Col, Card } from "react-bootstrap";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import DarkModeContext from "../../contexts/DarkModeContext";
 import { useAuth } from "../../contexts/AuthContext";
+import LogoDark from "../../assets/img/logo_dark.png";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/img/logo.png";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import "./Login.css";
 
@@ -13,6 +15,7 @@ const Login = () => {
   const { loginUser } = useAuth();
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
+  const darkMode = useContext(DarkModeContext);
 
   const onSubmit = async (data) => {
     const { email, password } = data;
@@ -34,7 +37,7 @@ const Login = () => {
         <Col xs={12} md={8} lg={6} className="w-100">
           <img
             className="logo-login"
-            src={Logo}
+            src={ darkMode ? LogoDark : Logo}
             alt="Logo"
           />
           <Card className="login-card rounded-5 shadow p-4">
@@ -59,7 +62,7 @@ const Login = () => {
                 <Form.Group className="mb-5">
                   <div className="float-end">
                     <small>
-                      <a href="#" className="blue">
+                      <a href="#" className="text-primary">
                         Olvidaste tu contraseña
                       </a>
                     </small>

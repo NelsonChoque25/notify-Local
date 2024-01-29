@@ -1,15 +1,28 @@
-import { useState, useEffect } from 'react';
+
 import { useAuth } from "../contexts/AuthContext";
+import useSystemTheme from "./useSystemTheme";
+import { useState, useEffect } from "react";
 
 const useDarkMode = () => {
-  const { userTheme } = useAuth();
   const [darkMode, setDarkMode] = useState(false);
+  const theme = useSystemTheme();
+  const { userTheme } = useAuth();
+
+  console.log("Tema del sistema:", theme);
 
   useEffect(() => {
-    if (userTheme && userTheme.darkMode !== undefined && userTheme.darkMode !== null) {
+    if (
+      userTheme &&
+      userTheme.darkMode !== undefined &&
+      userTheme.darkMode !== null
+    ) {
       setDarkMode(userTheme.darkMode);
+    } else if (theme === "dark") {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
     }
-  }, [userTheme]);
+  }, [userTheme, theme]);
 
   useEffect(() => {
     const theme = darkMode ? "dark" : "light";
