@@ -3,30 +3,18 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('BcpOwnAccounts', {
+    await queryInterface.createTable('CncBbva', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      sendsTo:{
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      from:{
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      channel:{
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      numberOperation:{
-        allowNull: false,
-        type: Sequelize.STRING
-      },
       amount:{
+        allowNull: false,
+        type: Sequelize.FLOAT
+      },
+      client:{
         allowNull: false,
         type: Sequelize.STRING
       },
@@ -38,6 +26,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('BcpOwnAccounts');
+    await queryInterface.dropTable('CncBbva');
   }
 };

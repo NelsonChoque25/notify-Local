@@ -64,6 +64,11 @@ routes.post('/send-email', authRequired, async (req, res) => {
  // Email Teleservices routes
  routes.get('/process-emails-ts', authRequired, emailTs.readAndProcessUnreadEmails);
  routes.get('/events/bcp-alerts', authRequired, eventControllerTs.getBcpAlert);
+ routes.get('/events/bcp-notification', authRequired, eventControllerTs.getBcpNotification);
+ routes.get('/events/bcp-own-account', authRequired, eventControllerTs.getBcpOwnAccount);
+ routes.get('/events/cnc-bbva', authRequired, eventControllerTs.getCncBbva);
+ routes.get('/events/interbank-company', authRequired, eventControllerTs.getInterbankCompany);
+
 
 /**
  * @swagger

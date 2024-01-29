@@ -1,9 +1,9 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const sequelize = require("../../../config/database");
 
-class BcpOwnAccount extends Model {}
+class CncBbva extends Model {}
 
-BcpOwnAccount.init(
+CncBbva.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,23 +11,11 @@ BcpOwnAccount.init(
       autoIncrement: true,
       allowNull: false,
     },
-    sendsTo: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    from: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    channel: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    numberOperation: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     amount: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    client: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -38,10 +26,10 @@ BcpOwnAccount.init(
   },
   {
     sequelize,
-    modelName: "BcpOwnAccount",
-    tableName: "BcpOwnAccounts",
+    modelName: "CncBbva",
+    tableName: "CncBbva",
     timestamps: false,
   }
 );
 
-module.exports = BcpOwnAccount;
+module.exports = CncBbva;

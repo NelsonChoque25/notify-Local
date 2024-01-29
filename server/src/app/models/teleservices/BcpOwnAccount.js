@@ -1,67 +1,55 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const sequelize = require("../../../config/database");
 
-class BcpNotification extends Model {}
+class BcpOwnAccount extends Model {}
 
-BcpNotification.init(
+BcpOwnAccount.init(
   {
     id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      autoIncrement: true,
       primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
     },
-    operationType: {
+    sendsTo: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    operationDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    operationNumber: {
+    accountSendsTo: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    orderingCompany: {
+    from: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    account: {
+    accountFrom: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    accountType: {
+    channel: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    beneficiary: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    destinationAccount: {
+    numberOperation: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     amount: {
-      type: DataTypes.STRING,
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
-    reference: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    message: {
-      type: DataTypes.STRING,
-      allowNull: true,
+    dateTime: {
+      type: DataTypes.DATE,
+      allowNull: false,
     },
   },
   {
     sequelize,
-    modelName: "BcpNotification",
-    tableName: "BcpNotifications",
+    modelName: "BcpOwnAccount",
+    tableName: "BcpOwnAccount",
     timestamps: false,
   }
 );
 
-module.exports = BcpNotification;
+module.exports = BcpOwnAccount;

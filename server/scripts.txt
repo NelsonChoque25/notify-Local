@@ -20,6 +20,7 @@ npx sequelize-cli migration:generate --name create-testsSamsung
 npx sequelize-cli migration:generate --name create-interbankCompany
 npx sequelize-cli migration:generate --name create-bcpAlert
 npx sequelize-cli migration:generate --name create-bcpNotify
-npx sequelize-cli migration:generate --name create-bcpOwnAccounts
+npx sequelize-cli migration:generate --name create-bcpOwnAccount
+npx sequelize-cli migration:generate --name create-cncBbva
 <======================================================>
 
