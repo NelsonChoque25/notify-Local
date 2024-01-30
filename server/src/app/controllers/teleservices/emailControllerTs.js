@@ -1,8 +1,11 @@
 const { processAndSaveEmails } = require('../../services/emailServiceTs');
 
 const readAndProcessUnreadEmails = async (req, res) => {
+
+  const io = req.io;
+
   try {
-    await processAndSaveEmails();
+    await processAndSaveEmails(io);
     res.send("Unread emails processed.");
   } catch (error) {
     console.error("Error in email processing:", error);

@@ -33,6 +33,7 @@ const getEmailData = () => {
       console.log(`Hay ${numMensajes} mensajes en tu bandeja de entrada.`);
 
       imap.end();
+      
     });
   });
 
@@ -195,22 +196,22 @@ const processAndSaveEmails2 = async () => {
   }
 };*/
 
-const processAndSaveEmails = async () => {
+const processAndSaveEmails = async (io) => {
   try {
     const emails = await getAndFlagUnreadMessages();
+
+    const socket = io;
+    
+    socket.emit('totalEmails', { data : emails.length });
+
     for (const { uid, message } of emails) {
 
-    
       const parsedEmail = await simpleParser(message);
       
-      
-     
       const subject = parseEmailSubject(parsedEmail);
       //const senderName = extractSenderName(parsedEmail);
       const emailDate = extractEmailDateTime(parsedEmail);
       const body = parsedEmail.text;
-
-
 
 
       if (subject == "Transferencia a su favor por Telecrédito") {
@@ -229,6 +230,10 @@ const processAndSaveEmails = async () => {
       } else if (subject.includes("Embedded Net DVR")) {
         await processEventHvEmail(parsedEmail, senderName);
       } */
+
+      io.emit('messageTs', subject);
+
+      console.log("Email procesado:", { subject })
       
 
       await markMessageAsRead(uid);
