@@ -58,7 +58,7 @@ getInterbankCompany = async (req, res) => {
   }
 };
 
-//Funcion
+//Funcion para filtros para BCP
 getBcpAlertByFilters = async (req, res) => {
   try {
     //const { orderingCompany, beneficiary, amount, datetime } = req.query;
