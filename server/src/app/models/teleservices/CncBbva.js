@@ -15,7 +15,7 @@ CncBbva.init(
       type: DataTypes.FLOAT,
       allowNull: false,
     },
-    client: {
+    orderingCompany: {
       type: DataTypes.STRING,
       allowNull: false,
     },

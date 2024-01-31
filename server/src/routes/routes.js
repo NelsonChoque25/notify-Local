@@ -70,6 +70,7 @@ routes.post('/send-email', authRequired, async (req, res) => {
  routes.get('/events/cnc-bbva', authRequired, eventControllerTs.getCncBbva);
  routes.get('/events/interbank-company', authRequired, eventControllerTs.getInterbankCompany);
 
+ routes.get('/events/bcp-filter', authRequired, eventControllerTs.getBcpAlertByFilters);
 
 /**
  * @swagger

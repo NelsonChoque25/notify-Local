@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.FLOAT
       },
-      client:{
+      orderingCompany:{
         allowNull: false,
         type: Sequelize.STRING
       },

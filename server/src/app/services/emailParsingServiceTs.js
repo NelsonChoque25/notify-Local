@@ -158,7 +158,7 @@ const processCNCBBVAEmail = async (parsedEmail, emailDate) => {
 
   await CncBbva.create({
     amount: amountNumeric,
-    client: cliente,
+    orderingCompany: cliente,
     dateTime: fechaObjeto,
   });
 
